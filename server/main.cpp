@@ -16,7 +16,7 @@ int main() {
     socket.bind("tcp://*:5555");
 
     // prepare some static data for responses
-    const std::string data{"World"};
+    const std::string data{"Answer to:"};
 
     for (;;)
     {
@@ -24,13 +24,13 @@ int main() {
 
         // receive a request from client
         socket.recv(request, zmq::recv_flags::none);
-        std::cout << "Received " << request.to_string() << std::endl;
+        std::cout << "Received \"" << request.to_string() << "\"" << std::endl;
 
         // simulate work
         std::this_thread::sleep_for(1s);
 
         // send the reply to the client
-        socket.send(zmq::buffer(data), zmq::send_flags::none);
+        socket.send(zmq::buffer(data+request.to_string()), zmq::send_flags::none);
     }
     return 0;
 }

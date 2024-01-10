@@ -1,6 +1,6 @@
 project(zmq_server)
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp zmq_messaging.cpp)
 
 target_link_libraries(
         ${PROJECT_NAME}

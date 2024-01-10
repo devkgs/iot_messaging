@@ -1,15 +1,12 @@
-//#include <string>
-//#include <chrono>
-//#include <thread>
-//#include <iostream>
-//
-//#include <zmq.hpp>
-
 #include "zmq_messaging.h"
+#include <zmq.hpp>
+#include <string>
+#include <chrono>
+#include <thread>
+#include <iostream>
 
-int main() {
-    start();
-    /*using namespace std::chrono_literals;
+void start(void){
+    using namespace std::chrono_literals;
     std::cout << "=== ZMQ server ===" << std::endl;
     // initialize the zmq context with a single IO thread
     zmq::context_t context{1};
@@ -34,6 +31,5 @@ int main() {
 
         // send the reply to the client
         socket.send(zmq::buffer(data+request.to_string()), zmq::send_flags::none);
-    }*/
-    return 0;
+    }
 }

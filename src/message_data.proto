@@ -1,0 +1,8 @@
+syntax = "proto2";
+
+package zzz;
+
+message heartbeat {
+    required uint32 uuid = 1;
+    required uint32 beat_counter = 2;
+}

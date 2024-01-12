@@ -2,10 +2,27 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
-
 #include <zmq.hpp>
 
-int main() {
+int main(int argc, char *argv[]) {
+    unsigned short uuid = 0;
+
+    if (argc == 1) {
+        std::string arg = argv[1];
+        try {
+            std::size_t pos;
+            uuid = std::stoi(arg, &pos);
+            if (pos < arg.size()) {
+                std::cerr << "trailing characters after number: " << arg << '\n';
+            }
+        } catch (std::invalid_argument const &ex) {
+            std::cerr << "invalid number: " << arg << '\n';
+        } catch (std::out_of_range const &ex) {
+            std::cerr << "number out of range: " << arg << '\n';
+        }
+    }
+    std::cout << "uuid= " << uuid << std::endl;
+
     // initialize the zmq context with a single IO thread
     zmq::context_t context{1};
 
@@ -23,10 +40,10 @@ int main() {
         std::cout << "Sending \"" << data_to_send << "\"" << std::endl;
         auto res = socket.send(zmq::buffer(data_to_send), zmq::send_flags::none);
 
-        std::cout << "wait" <<std::endl;
+        std::cout << "wait " << res.value() << std::endl;
         // wait for reply from server
         zmq::message_t reply{};
-        socket.recv(reply, zmq::recv_flags::none);
+        std::optional<size_t> ret = socket.recv(reply, zmq::recv_flags::none);
 
         std::cout << "Received \"" << reply.to_string() << "\"" << std::endl;
 //        std::cout << " (" << request_num << ")";

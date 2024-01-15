@@ -5,17 +5,8 @@ project(iot_messaging)
 
 set(CMAKE_CXX_STANDARD 17)
 
-find_package(cppzmq)
+find_package(cppzmq REQUIRED)
 
+add_subdirectory(proto)
 add_subdirectory(client)
 add_subdirectory(server)
-
-#add_executable(
-#        ${CMAKE_PROJECT_NAME}
-#        main.cpp
-#)
-#
-#target_link_libraries(
-#        ${CMAKE_PROJECT_NAME}
-#        cppzmq
-#)

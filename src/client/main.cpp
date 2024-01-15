@@ -4,8 +4,11 @@
 #include <iostream>
 #include <zmq.hpp>
 
+#include "message_data.pb.h"
+
 int main(int argc, char *argv[]) {
     unsigned short uuid = 0;
+    message_data::heartbeat hb;
 
     if (argc == 1) {
         std::string arg = argv[1];

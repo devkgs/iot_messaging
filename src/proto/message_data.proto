@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package zzz;
+package message_data;
 
 message heartbeat {
     required uint32 uuid = 1;

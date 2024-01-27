@@ -24,7 +24,7 @@ void start(void){
 
         // receive a request from client
         std::optional<size_t> ret = socket.recv(request, zmq::recv_flags::none);
-        std::cout << "Received \"" << request.to_string() << "\"" << std::endl;
+        std::cout << "SERVER<Received \"" << request.to_string() << "\"" << std::endl;
         //std::cout << "ret= " << ret.has_value() << std::endl;
 
         // simulate work
